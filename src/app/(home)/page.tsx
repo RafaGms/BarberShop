@@ -1,8 +1,8 @@
-'use client'
 import Header from "../_components/header";
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import Search from './_components/search';
+import BookingItem from "../_components/booking-items";
 export default function Home() {
   return (
     <div>
@@ -18,6 +18,13 @@ export default function Home() {
       <div className="px-5 mt-6">
         <Search />
       </div>
+
+
+      <div className="px-5 mt-6">
+        <h2 className="uppercase text-xs text-muted-foreground mb-3">Agendamentos</h2>
+        <BookingItem />
+      </div>
+
     </div>
   );
 }

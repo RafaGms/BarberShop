@@ -1,9 +1,14 @@
+// Como que esse componente faz interação com o onClick tenho que fala que é um "use Client"
+'use client';
+
 import { Badge } from "@/app/_components/ui/badge";
 import { Button } from "@/app/_components/ui/button";
 import { Card, CardContent } from "@/app/_components/ui/card";
 import { Barbershop } from '@prisma/client';
 import { Star } from "lucide-react";
 import Image from "next/image";
+// para fazer a navigation de page
+import { useRouter } from "next/navigation";
 
 // tipagem da prop barbershop
 interface BarberShopItemProps {
@@ -11,6 +16,12 @@ interface BarberShopItemProps {
 }
 
 const BarberShopItem = ({ barbershop }: BarberShopItemProps) => {
+
+   const route = useRouter()
+   // Function para redirecionar o cliente para a tela de detalhe da barbershop
+   const handleBookingClick = () => {
+      route.push(`/barbershops/${barbershop.id}`)
+   }
 
    return (
       <Card className="max-w-[159px] min-w-[159px] w-full">
@@ -26,7 +37,7 @@ const BarberShopItem = ({ barbershop }: BarberShopItemProps) => {
                <p className="text-muted-foreground text-xs items-center overflow-hidden text-ellipsis text-nowrap">{barbershop.address}</p>
             </div>
             <div className="p-2 flex justify-center items-center ">
-               <Button className="w-full" variant={"secondary"}>Reservar</Button>
+               <Button className="w-full" onClick={handleBookingClick} variant={"secondary"}>Reservar</Button>
             </div>
          </CardContent>
       </Card>

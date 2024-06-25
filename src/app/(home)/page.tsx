@@ -46,9 +46,10 @@ export default async function Home() {
           ))}
         </div>
       </div>
-      <div className="pl-5">
+
+
+      <div className="pl-5 mb-16">
         <h2 className="uppercase text-xs text-muted-foreground mb-3">Populares</h2>
-        {/* Fazendo um map para pegar os nomes das Barbearias no banco de dados e to passando como prop para o component ||| BARBERSHOPS no .map é o banco de dados */}
         <div className="flex flex-row gap-3 overflow-x-auto [&::-webkit-scrollbar]:hidden">
           {barbershops.map((barbershop) => (
             <BarberShopItem key={barbershop.id} barbershop={barbershop} />

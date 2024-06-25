@@ -1,4 +1,4 @@
-
+'use client'
 import { Card, CardContent } from "./ui/card";
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
@@ -14,8 +14,16 @@ import {
    SheetTrigger,
 } from "./ui/sheet"
 import { Menu } from 'lucide-react';
+import { signIn, useSession } from "next-auth/react";
 
 const Header = () => {
+
+   const { data } = useSession()
+
+   const handleLoginClick = async () => {
+      await signIn()
+   }
+
    return (
       <Card className="rounded-none">
          <CardContent className="px-4 py-5  justify-between flex flex-row items-center">
@@ -24,7 +32,12 @@ const Header = () => {
             </div>
 
             <div>
-               <Sheet>
+
+
+               {data?.user ? (
+                  <h1>{data.user.name}</h1>
+               ) : (<Button onClick={handleLoginClick}>login</Button>)}
+               {/* <Sheet>
                   <SheetTrigger asChild>
                      <Button variant={"outline"} className="px-2"><Menu /></Button>
                   </SheetTrigger>
@@ -42,7 +55,7 @@ const Header = () => {
                         </SheetClose>
                      </SheetFooter>
                   </SheetContent>
-               </Sheet>
+               </Sheet> */}
             </div>
          </CardContent>
       </Card>

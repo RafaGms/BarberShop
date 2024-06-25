@@ -1,8 +1,6 @@
-import { Button } from '@/app/_components/ui/button';
 import { db } from '@/app/_lib/prisma';
-import { ChevronLeft, MapPinIcon, Menu, Star } from 'lucide-react';
-import Image from 'next/image';
 import BarberShopInfo from './_components/barbershop-info';
+import ServiceItem from './_components/service-item';
 // vai receber o paramentro da URL ex: http://localhost:3000/barbershops/id
 // criando a interface para params
 interface BarbershopDetailsPageProps {
@@ -27,6 +25,9 @@ const BarberShopDetailsPage = async ({ params }: BarbershopDetailsPageProps) => 
       where: {
          id: params.id,
       },
+      include: {
+         services: true,
+      }
    })
 
    if (!Barbershop) {
@@ -37,6 +38,10 @@ const BarberShopDetailsPage = async ({ params }: BarbershopDetailsPageProps) => 
    return (
       <div>
          <BarberShopInfo Barbershop={Barbershop} />
+
+         <div className='px-5 flex flex-col gap-4 py-6' > {Barbershop.services.map((service) => (
+            <ServiceItem key={service.id} service={service} />
+         ))}</div>
       </div>
    );
 }

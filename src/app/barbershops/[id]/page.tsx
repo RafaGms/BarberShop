@@ -1,4 +1,8 @@
+import { Button } from '@/app/_components/ui/button';
 import { db } from '@/app/_lib/prisma';
+import { ChevronLeft, MapPinIcon, Menu, Star } from 'lucide-react';
+import Image from 'next/image';
+import BarberShopInfo from './_components/barbershop-info';
 // vai receber o paramentro da URL ex: http://localhost:3000/barbershops/id
 // criando a interface para params
 interface BarbershopDetailsPageProps {
@@ -31,7 +35,9 @@ const BarberShopDetailsPage = async ({ params }: BarbershopDetailsPageProps) => 
    }
 
    return (
-      <h1>{Barbershop.name}</h1>
+      <div>
+         <BarberShopInfo Barbershop={Barbershop} />
+      </div>
    );
 }
 
